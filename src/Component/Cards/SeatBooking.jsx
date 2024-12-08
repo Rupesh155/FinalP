@@ -1,10 +1,12 @@
 
 import React, { useState } from "react";
 import { loadStripe } from '@stripe/stripe-js';
+import { useNavigate } from "react-router-dom";
 const stripePromise = loadStripe("pk_test_51Os8E4SEhF2ghQp3XHXBDJU6mg4MgQvqxMyH9zs14Wroo0geX7yNvfQuqwdIjNC3xQk5DUZZUE2b69BXTH9AaGfL00vBl5hq9k");
 const SeatBooking = () => {
 
   const movie = { name: "Example Movie" };
+    let navigate=   useNavigate()
 
   const [selectedSeats, setSelectedSeats] = useState([]);
 console.log(selectedSeats,"aa");
@@ -29,6 +31,8 @@ console.log(selectedSeats,"aa");
   };
 
   const handlePayment = async () => {
+    let token=localStorage.getItem('token')
+console.log(token,"heheheheh");
 
     const stripe = await stripePromise;
 
@@ -41,7 +45,8 @@ console.log(selectedSeats,"aa");
     };
 
     const headers = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      // Authorization:`${token}`
     };
 
     // Make a request to the backend to create a checkout session
@@ -50,6 +55,10 @@ console.log(selectedSeats,"aa");
       headers: headers,
       body: JSON.stringify(body)
     });
+    if(response.status==400){
+      nav
+
+    }
 
     const session = await response.json();
 

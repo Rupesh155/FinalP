@@ -7,7 +7,10 @@ import OneMOvieCard from './Component/Cards/OneMOvieCard'
 import Home from './Component/Home'
 
 import SeatBooking from './Component/Cards/SeatBooking'
+import Success from './Component/Succes'
+import Failure from './Component/Fail'
 function App() {
+  let a=false
 
   return (
     <>
@@ -18,6 +21,10 @@ function App() {
         <Route path='/movies/:id' element={<OneMOvieCard />} />
         <Route path="/book-seats" element={<SeatBooking />} />
         <Route path='/AllCard' element={<AllCard />} />
+        <Route path='/success' element={a?<Success/>:<Home/>} />
+        <Route path='/cancel' element={<Failure/>} />
+
+
       </Routes>
 
     </>
